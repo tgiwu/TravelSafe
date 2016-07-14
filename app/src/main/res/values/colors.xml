@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff00ffff</color>
+
+    <color name="login_title_txt">#FF000000</color>
+    <color name="error_edt_background">#ffff0000</color>
+    <color name="normal_edt_background">#00ffffff</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="start_ignore_text_color">#ffffffff</color>
+    <color name="start_login_text_color">#ffffffff</color>
+    <color name="start_registry_text_color">#ffffffff</color>
+
+    <color name="login_middle_bg_color">#fff1f1f1</color>
+    <color name="login_bottom_color">#ffffffff</color>
+    <color name="login_toast_txt_color">#ffffffff</color>
+    <color name="login_title_txt_color">#ff3a2300</color>
+    <color name="login_hint_txt_color">#ff9e9e9e</color>
+    <color name="login_forget_txt_color">#ff4f4f4f</color>
+    <color name="login_btn_txt_color">#ffffffff</color>
+</resources>

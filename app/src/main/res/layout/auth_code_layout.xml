@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="@dimen/login_input_width"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/auth_code_layout">
+    <EditText
+        android:id="@+id/auth_code_input"
+        android:gravity="center_vertical"
+        android:hint="@string/hint_input_auth_code"
+        android:textSize="@dimen/login_input_hint_txt_size"
+        android:paddingLeft="10dp"
+        android:background="@drawable/auth_code_input"
+        android:layout_width="@dimen/login_auth_code_input_width"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/send_auth_code"
+        android:text="@string/request_auth_code"
+        android:layout_width="@dimen/login_auth_code_btn_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/request_auth_code"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+
+</LinearLayout>

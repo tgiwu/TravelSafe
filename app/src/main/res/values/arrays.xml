@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="country_code_array">
+        <item>@string/country_code_cn</item>
+    </string-array>
+</resources>

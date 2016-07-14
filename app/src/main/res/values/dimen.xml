@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="system_padding">20dp</dimen>
+
+    <dimen name="start_ignore_margin_top">45dp</dimen>
+    <dimen name="start_ignore_margin_right">31dp</dimen>
+    <dimen name="start_ignore_text_size">15sp</dimen>
+    <dimen name="start_login_margin_top">432dp</dimen>
+    <dimen name="start_registry_margin_top">19dp</dimen>
+    <dimen name="start_login_register_text_size">19sp</dimen>
+    
+    <dimen name="login_toast_margin_top">96dp</dimen>
+    <dimen name="login_head_height">224dp</dimen>
+    <dimen name="login_title_margin_left">60dp</dimen>
+    <dimen name="login_title_margin_top">205dp</dimen>
+    <dimen name="login_middle_height">236dp</dimen>
+    <dimen name="login_mobile_margin_top">63dp</dimen>
+    <dimen name="login_password_margin_top">31dp</dimen>
+    <dimen name="login_forget_margin_top">22dp</dimen>
+    <dimen name="login_forget_margin_left">251dp</dimen>
+    <dimen name="login_bottom_height">180dp</dimen>
+    <dimen name="login_btn_margin_top">71dp</dimen>
+    <dimen name="login_input_height">39dp</dimen>
+    <dimen name="login_input_width">268dp</dimen>
+    <dimen name="login_input_margin">46dp</dimen>
+    <dimen name="login_auth_code_input_width">138dp</dimen>
+    <dimen name="login_auth_code_btn_width">109dp</dimen>
+    <dimen name="login_btn_txt_size">19sp</dimen>
+    <dimen name="login_title_txt_size">29sp</dimen>
+    <dimen name="login_toast_txt_size">14sp</dimen>
+    <dimen name="login_forget_txt_size">15sp</dimen>
+    <dimen name="login_input_hint_txt_size">15sp</dimen>
+
+</resources>

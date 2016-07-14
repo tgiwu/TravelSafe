@@ -1,0 +1,22 @@
+<resources>
+    <string name="start_ignore">跳过</string>
+    <string name="start_login">登录</string>
+    <string name="start_registry">注册</string>
+    <string name="login_toast">跟团游用户请直接入旅行社提供的账号密码登录</string>
+    <string name="login_forget_password">忘记密码？</string>
+    <string name="login_mobile_hint">+86输入手机号码</string>
+    <string name="login_password_hint">输入密码</string>
+    <string name="login_title">登录</string>
+    <string name="request_auth_code">发送验证码</string>
+    <string name="auth_code_hint">输入验证码</string>
+    <string name="next_btn">下一步</string>
+    <string name="title_retrieve_password">密码重置</string>
+    <string name="toast_retrieve_password">该手机号尚未注册，点击下一步使用该手机号注册</string>
+    <string name="btn_finish_registry">完成注册</string>
+    <string name="title_registry">注册</string>
+    <string name="hint_nickname">填写您的昵称（跟团游请填写真实姓名）</string>
+    <string name="check_box_show_password">显示密码</string>
+    <string name="btn_previous">上一步</string>
+    <string name="btn_save_and_login">保持并登录</string>
+    <string name="hint_input_auth_code">输入验证码</string>
+</resources>
