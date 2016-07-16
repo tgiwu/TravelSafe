@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.event.CheckInputEvent;
 import com.huanqiu.travelsafe.event.RxBus;
 import com.huanqiu.travelsafe.event.StartFragmentTransformEvent;
 
@@ -60,9 +62,8 @@ public class RetrievePasswordStepTwoPageFragment extends BaseStartPageFragment i
     LinearLayout previousAndLoginLayout;
     @BindView(R.id.login_rl)
     RelativeLayout loginLayout;
-
-    @Inject
-    RxBus rxBus;
+    @BindView(R.id.login_password_confirm_edt)
+    EditText loginPasswoedConfirmEdt;
     @BindView(R.id.login_nickname_edt)
     EditText loginNicknameEdt;
     @BindView(R.id.send_auth_code)
@@ -71,6 +72,8 @@ public class RetrievePasswordStepTwoPageFragment extends BaseStartPageFragment i
     TextView previousBtn;
     @BindView(R.id.save_and_login_btn)
     TextView saveAndLoginBtn;
+    @Inject
+    RxBus rxBus;
 
     @Nullable
     @Override
@@ -107,6 +110,9 @@ public class RetrievePasswordStepTwoPageFragment extends BaseStartPageFragment i
         loginPasswordEdt.setVisibility(View.GONE);
         loginBtnTxt.setText(next);
         loginLayout.setVisibility(View.GONE);
+        loginMobileEdt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        loginMobileEdt.setHint(R.string.login_password_hint);
+        authCodeLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -151,8 +157,21 @@ public class RetrievePasswordStepTwoPageFragment extends BaseStartPageFragment i
     }
 
     @Override
-    public void showError(String s) {
+    public void showError(int s) {
         buildToast(s);
+    }
+
+    @Override
+    public void doNext() {
+
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
+        Map<String, String> param = new HashMap<>();
+        param.put("password", loginMobileEdt.getText().toString());
+        param.put("password_confirm", loginPasswoedConfirmEdt.getText().toString());
+        return param;
     }
 
     @OnClick({R.id.previous_btn, R.id.save_and_login_btn})
@@ -166,17 +185,14 @@ public class RetrievePasswordStepTwoPageFragment extends BaseStartPageFragment i
                 rxBus.send(startFragmentTransformEvent);
                 break;
             case R.id.save_and_login_btn:
+                Map<String, StartController.CHECK_TYPE> checkMap = new HashMap<>();
+                checkMap.put("password", StartController.CHECK_TYPE.PASSWORD);
+                checkMap.put("password_confirm", StartController.CHECK_TYPE.PASSWORD);
+                CheckInputEvent event = new CheckInputEvent(this.hashCode());
+                event.setTypeMap(checkMap);
+                rxBus.send(event);
                 break;
         }
     }
 
-    @Override
-    public Map<String, String> getRetrieveParam() {
-        return null;
-    }
-
-    @Override
-    public void onFocusChange(View view, boolean b) {
-
-    }
 }

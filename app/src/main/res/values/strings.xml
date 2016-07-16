@@ -30,6 +30,7 @@
     <string name="login_toast">跟团游用户请直接输入旅行社提供的账号密码登录</string>
     <string name="login_mobile_hint">+86 Mobile number </string>
     <string name="login_password_hint">Password</string>
+    <string name="hint_password_confirm">Password confirm</string>
     <string name="login_forget_password">Forget Password?</string>
     <string name="login_btn_txt">Login</string>
     <string name="auth_code_hint">input auth code</string>

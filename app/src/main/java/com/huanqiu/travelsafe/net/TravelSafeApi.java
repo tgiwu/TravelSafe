@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers;
  */
 public class TravelSafeApi {
 
-    public static Observable<String> requestVerification(String type, String phoneNumber) {
+    public static Observable<String> requestAuthCode(String type, String phoneNumber) {
         Observable<RequestVerificationCodeModel> call = HttpClientManager.mApiService.requestVerification(BuildConfig.SERVER_VERSION, Utils.buildUserAgent(), type, phoneNumber);
         return call.subscribeOn(Schedulers.newThread())
                 .throttleFirst(10 * 1000, TimeUnit.MILLISECONDS)

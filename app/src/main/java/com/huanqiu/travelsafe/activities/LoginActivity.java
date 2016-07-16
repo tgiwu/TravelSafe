@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity implements
 //                if (rxBus != null) {
 //                    rxBus.send("ssssssssss");
 //                }
-////            TravelSafeApi.requestVerification("start_registry_bg", "13466739594").subscribe(new Subscriber<String>() {
+////            TravelSafeApi.requestAuthCode("start_registry_bg", "13466739594").subscribe(new Subscriber<String>() {
 ////                @Override
 ////                public void onCompleted() {
 ////                    Log.e("zhy", "onCompleted: ");

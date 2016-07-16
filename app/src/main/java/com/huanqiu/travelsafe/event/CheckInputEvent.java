@@ -2,29 +2,22 @@ package com.huanqiu.travelsafe.event;
 
 import com.huanqiu.travelsafe.controllers.StartController;
 
+import java.util.Map;
+
 /**
  * Created by Administrator on 2016/7/14.
  */
 public class CheckInputEvent implements IEvent {
     private int callingId;
 
-    private StartController.CHECK_TYPE type;
-    private String input;
+    private Map<String, StartController.CHECK_TYPE> typeMap;
 
-    public StartController.CHECK_TYPE getType() {
-        return type;
+    public Map<String, StartController.CHECK_TYPE> getTypeMap() {
+        return typeMap;
     }
 
-    public void setType(StartController.CHECK_TYPE type) {
-        this.type = type;
-    }
-
-    public String getInput() {
-        return input;
-    }
-
-    public void setInput(String input) {
-        this.input = input;
+    public void setTypeMap(Map<String, StartController.CHECK_TYPE> typeMap) {
+        this.typeMap = typeMap;
     }
 
     public CheckInputEvent(int callingId) {

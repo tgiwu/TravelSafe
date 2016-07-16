@@ -43,6 +43,9 @@ public abstract class BaseUiController<U extends BaseUiController.Ui<UC>, UC> ex
             if (!ui.isModal() && !(ui instanceof SubUi)) {
                 updateDisplayTitle(getUiTitle(ui));
             }
+
+            onUiAttached(ui);
+            populateUi(ui);
         }
     }
 

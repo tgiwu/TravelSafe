@@ -52,4 +52,16 @@ public class Utils {
         result &= pattern.matcher(password).matches();
         return result;
     }
+
+    public static boolean checkAuth(String auth) {
+        boolean result = true;
+        result &= !TextUtils.isEmpty(auth);
+        Pattern pattern = Pattern.compile("^[0-9]*$");
+        result &= pattern.matcher(auth).matches();
+        return result;
+    }
+
+    public static boolean checkNickname(String nickname) {
+        return true;
+    }
 }

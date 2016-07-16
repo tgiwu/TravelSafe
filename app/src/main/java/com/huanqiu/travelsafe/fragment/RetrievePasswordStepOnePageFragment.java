@@ -17,9 +17,11 @@ import android.widget.TextView;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.event.CheckInputEvent;
 import com.huanqiu.travelsafe.event.StartFragmentTransformEvent;
 import com.huanqiu.travelsafe.event.RxBus;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -55,8 +57,6 @@ public class RetrievePasswordStepOnePageFragment extends BaseStartPageFragment i
     LinearLayout loginFragmentLayout;
     @BindView(R.id.login_title)
     TextView loginTitle;
-//    @BindView(R.id.toast_start_txt)
-//    TextView toastTxt;
     @BindString(R.string.title_retrieve_password)
     String titleRetrievePass;
     @BindDrawable(R.drawable.start_bg_2)
@@ -70,11 +70,6 @@ public class RetrievePasswordStepOnePageFragment extends BaseStartPageFragment i
 
     @Inject
     RxBus rxBus;
-
-//    @BindView(R.id.login_fragment_layout)
-//    LinearLayout loginFragmentLayout;
-//    @BindView(R.id.login_forget_password_txt)
-//    TextView loginForgetPass;
 
     @Nullable
     @Override
@@ -112,9 +107,7 @@ public class RetrievePasswordStepOnePageFragment extends BaseStartPageFragment i
         chkShowPassword.setVisibility(View.GONE);
         loginPasswordEdt.setVisibility(View.GONE);
         loginBtnTxt.setText(next);
-//        loginLayout.setVisibility(View.GONE);
         previousAndLoginLayout.setVisibility(View.GONE);
-//        buildToast(R.string.toast_retrieve_password);
     }
 
     @Override
@@ -147,16 +140,20 @@ public class RetrievePasswordStepOnePageFragment extends BaseStartPageFragment i
         super.onAttach(context);
     }
 
-    @OnClick({R.id.login_fragment_layout, R.id.send_auth_code, R.id.login_btn_txt})
+    @OnClick({R.id.login_fragment_layout, R.id.send_auth_code, R.id.login_rl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_fragment_layout:
                 break;
             case R.id.send_auth_code:
-
                 break;
-            case R.id.login_btn_txt:
-                rxBus.send(new StartFragmentTransformEvent("retrieve_two", StartController.FRAGMENTS.RETRIEVE_TWO, null));
+            case R.id.login_rl:
+                CheckInputEvent checkEvent = new CheckInputEvent(this.hashCode());
+                Map<String, StartController.CHECK_TYPE> checkMap = new HashMap<>();
+                checkMap.put("username", StartController.CHECK_TYPE.PHONE);
+                checkMap.put("captcha", StartController.CHECK_TYPE.AUTH);
+                checkEvent.setTypeMap(checkMap);
+                rxBus.send(checkEvent);
                 break;
         }
     }
@@ -172,17 +169,22 @@ public class RetrievePasswordStepOnePageFragment extends BaseStartPageFragment i
     }
 
     @Override
-    public void showError(String s) {
-        buildToast(R.string.toast_retrieve_password);
+    public void showError(int s) {
+        Log.i("zhy", "showError: " + s);
+//        buildToast(R.string.toast_retrieve_password);
     }
 
     @Override
-    public Map<String, String> getRetrieveParam() {
+    public void doNext() {
+        rxBus.send(new StartFragmentTransformEvent("retrieve_two", StartController.FRAGMENTS.RETRIEVE_TWO, null));
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
+        Map<String, String> param = new HashMap<>();
+        param.put("username", loginMobileEdt.getText().toString());
+        param.put("captcha", authCodeInput.getText().toString());
         return null;
     }
 
-    @Override
-    public void onFocusChange(View view, boolean b) {
-
-    }
 }

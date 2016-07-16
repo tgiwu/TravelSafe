@@ -14,8 +14,12 @@ import android.widget.TextView;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.event.CheckInputEvent;
 import com.huanqiu.travelsafe.event.StartFragmentTransformEvent;
 import com.huanqiu.travelsafe.event.RxBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -94,21 +98,37 @@ public class RegistryOneFragment extends BaseStartPageFragment implements StartC
         return fragment;
     }
 
-    @OnClick({R.id.login_mobile_edt, R.id.login_rl, R.id.save_and_login_btn})
+    @OnClick({R.id.login_rl, R.id.send_auth_code})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.login_mobile_edt:
-                break;
             case R.id.login_rl:
-                rxBus.send(new StartFragmentTransformEvent("registry_two", StartController.FRAGMENTS.REGISTRY_TWO, null));
+                Map<String, StartController.CHECK_TYPE> checkMap = new HashMap<>();
+                checkMap.put("username", StartController.CHECK_TYPE.PHONE);
+                checkMap.put("captcha", StartController.CHECK_TYPE.AUTH);
+                CheckInputEvent checkInputEvent = new CheckInputEvent(this.hashCode());
+                checkInputEvent.setTypeMap(checkMap);
+                rxBus.send(checkInputEvent);
                 break;
-            case R.id.save_and_login_btn:
+            case R.id.send_auth_code:
                 break;
         }
     }
 
     @Override
-    public void onFocusChange(View view, boolean b) {
+    public void showError(int error) {
 
+    }
+
+    @Override
+    public void doNext() {
+        rxBus.send(new StartFragmentTransformEvent("registry_two", StartController.FRAGMENTS.REGISTRY_TWO, null));
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
+        Map<String, String> param = new HashMap<>();
+        param.put("username", loginMobileEdt.getText().toString());
+        param.put("captcha", authCodeInput.getText().toString());
+        return param;
     }
 }

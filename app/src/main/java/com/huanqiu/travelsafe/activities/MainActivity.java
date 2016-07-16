@@ -13,6 +13,8 @@ import com.huanqiu.travelsafe.display.Display;
  * status bar and navigation/system bar) with user interaction.
  */
 public class MainActivity extends BaseActivity implements MainController.MainControllerUi {
+
+    private MainController.MainControllerUiCallback mUiCallbacks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class MainActivity extends BaseActivity implements MainController.MainCon
 
     @Override
     public void setCallbacks(MainController.MainControllerUiCallback callbacks) {
-
+        mUiCallbacks = callbacks;
     }
 
     @Override

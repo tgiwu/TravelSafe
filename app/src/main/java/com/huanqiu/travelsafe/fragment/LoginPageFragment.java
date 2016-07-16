@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huanqiu.travelsafe.App;
+import com.huanqiu.travelsafe.BuildConfig;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.MainController;
 import com.huanqiu.travelsafe.controllers.StartController;
@@ -34,9 +36,10 @@ import butterknife.OnClick;
 /**
  * Created by Administrator on 2016/7/6.
  */
-public class LoginPageFragment extends BaseStartPageFragment implements StartController.LoginUi {
+public class LoginPageFragment extends BaseStartPageFragment implements StartController.LoginUi{
 
     private static String PARAM_ID = "param_id";
+    private byte flag = 3;
 
     @BindView(R.id.login_head_layout)
     RelativeLayout loginHeadLayout;
@@ -103,8 +106,6 @@ public class LoginPageFragment extends BaseStartPageFragment implements StartCon
         chkShowPassword.setVisibility(View.GONE);
         loginTitle.setText(R.string.login_title);
         loginBtnTxt.setText(R.string.login_title);
-        loginMobileEdt.setOnFocusChangeListener(this);
-        loginPasswordEdt.setOnFocusChangeListener(this);
         previousAndLoginLayout.setVisibility(View.GONE);
 
         buildToast(R.string.login_toast);
@@ -151,8 +152,13 @@ public class LoginPageFragment extends BaseStartPageFragment implements StartCon
                 rxBus.send(event);
                 break;
             case R.id.login_rl:
-                DoActiveEvent doActiveEvent = new DoActiveEvent(StartController.ACTIVITIES.LOGIN, this.hashCode());
-                rxBus.send(doActiveEvent);
+                Map<String, StartController.CHECK_TYPE> checkMap = new HashMap<>();
+                checkMap.put("username", StartController.CHECK_TYPE.PHONE);
+                checkMap.put("password", StartController.CHECK_TYPE.PASSWORD);
+
+                CheckInputEvent checkEvent = new CheckInputEvent(this.hashCode());
+                checkEvent.setTypeMap(checkMap);
+                rxBus.send(checkEvent);
                 break;
         }
     }
@@ -168,34 +174,22 @@ public class LoginPageFragment extends BaseStartPageFragment implements StartCon
     }
 
     @Override
-    public void showError(String s) {
-        Log.e("zhy", "showError: " + s);
+    public void showError(int s) {
+        if (BuildConfig.DEBUG)
+        Log.i("zhy", "flag = " + Integer.toBinaryString(flag));
     }
 
     @Override
-    public Map<String, String> getLoginParam() {
+    public void doNext() {
+        DoActiveEvent doActiveEvent = new DoActiveEvent(StartController.ACTIVITIES.LOGIN, this.hashCode());
+        rxBus.send(doActiveEvent);
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
         Map<String, String> param = new HashMap<>();
         param.put("username", loginMobileEdt.getText().toString());
         param.put("password", loginPasswordEdt.getText().toString());
         return param;
-    }
-
-
-    @Override
-    public void onFocusChange(View view, boolean b) {
-        if (!b && view instanceof EditText) {
-            CheckInputEvent event = new CheckInputEvent(this.getId());
-            event.setInput(((EditText) view).getText().toString());
-            switch (view.getId()) {
-                case R.id.login_mobile_edt:
-                    event.setType(StartController.CHECK_TYPE.PHONE);
-                    break;
-                case R.id.login_password_edt:
-                    event.setType(StartController.CHECK_TYPE.PASSWORD);
-                    break;
-            }
-
-            rxBus.send(event);
-        }
     }
 }

@@ -15,7 +15,11 @@ import android.widget.TextView;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.event.CheckInputEvent;
 import com.huanqiu.travelsafe.event.RxBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -104,12 +108,31 @@ public class RegistryTwoFragment extends BaseStartPageFragment implements StartC
             case R.id.send_auth_code:
                 break;
             case R.id.save_and_login_btn:
+                Map<String, StartController.CHECK_TYPE> checkMap = new HashMap<>();
+                checkMap.put("nickname", StartController.CHECK_TYPE.NICKNAME);
+                checkMap.put("password", StartController.CHECK_TYPE.PASSWORD);
+                CheckInputEvent checkEvent = new CheckInputEvent(this.hashCode());
+                checkEvent.setTypeMap(checkMap);
+                rxBus.send(checkEvent);
                 break;
         }
     }
 
     @Override
-    public void onFocusChange(View view, boolean b) {
+    public void showError(int error) {
 
+    }
+
+    @Override
+    public void doNext() {
+
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
+        Map<String, String> param = new HashMap<>();
+        param.put("nickname", loginNicknamEdt.getText().toString());
+        param.put("password", loginPasswordEdt.getText().toString());
+        return param;
     }
 }

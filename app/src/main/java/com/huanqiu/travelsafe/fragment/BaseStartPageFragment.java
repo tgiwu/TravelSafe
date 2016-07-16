@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/7/7.
  */
-public abstract class BaseStartPageFragment extends BaseTravelSafeFragment implements StartController.StartUi, View.OnFocusChangeListener{
+public abstract class BaseStartPageFragment extends BaseTravelSafeFragment implements StartController.StartUi{
 
     private StartController.StartUiCallback mCallBack;
     private SuperCardToast mToast;

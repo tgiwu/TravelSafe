@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,18 +22,26 @@ import com.huanqiu.travelsafe.controllers.MainController;
 import com.huanqiu.travelsafe.display.AndroidDisplay;
 import com.huanqiu.travelsafe.display.Display;
 
-public abstract class BaseActivity extends AppCompatActivity implements MainController.HostCallBacks{
+public abstract class BaseActivity extends AppCompatActivity implements MainController.HostCallBacks/*, View.OnLayoutChangeListener*/ {
 
     private MainController mMainController;
     private Display mDisplay;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+//    private int screenHeight;
+//    private int keyHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayout());
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View view = layoutInflater.inflate(getLayout(), null, false);
+        setContentView(view);
+//        screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
+//        keyHeight = screenHeight/3;
+//        view.addOnLayoutChangeListener(this);
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (needToolsBar()) setToolbar();
 
@@ -46,19 +55,31 @@ public abstract class BaseActivity extends AppCompatActivity implements MainCont
     public abstract int getLayout();
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         mMainController.attachDisplay(mDisplay);
         mMainController.setHostCallbacks(this);
         mMainController.init();
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     protected void onPause() {
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
         mMainController.suspend();
         mMainController.setHostCallbacks(null);
         mMainController.detachDisplay(mDisplay);
-        super.onPause();
+        super.onStop();
     }
 
     public abstract boolean needToolsBar();
@@ -115,4 +136,19 @@ public abstract class BaseActivity extends AppCompatActivity implements MainCont
         setSupportActionBar(toolbar);
         getDisplay().setSupportActionBar(toolbar, handleBackground);
     }
+
+
+//    @Override
+//    public void onLayoutChange(View view, int left, int top, int right,
+//                               int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//        if(oldBottom != 0 && bottom != 0 &&(oldBottom - bottom > keyHeight)){
+//
+////            Toast.makeText(MainActivity.this, "监听到软键盘弹起...", Toast.LENGTH_SHORT).show();
+//
+//        }else if(oldBottom != 0 && bottom != 0 &&(bottom - oldBottom > keyHeight)){
+//
+////            Toast.makeText(MainActivity.this, "监听到软件盘关闭...", Toast.LENGTH_SHORT).show();
+//
+//        }
+//    }
 }

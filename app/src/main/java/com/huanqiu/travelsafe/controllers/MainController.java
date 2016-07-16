@@ -1,5 +1,6 @@
 package com.huanqiu.travelsafe.controllers;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
@@ -97,9 +98,27 @@ public class MainController extends BaseUiController<MainController.MainControll
     }
 
     @Override
+    public boolean handleIntent(Intent intent) {
+        return mStartController.handleIntent(intent);
+    }
+
+    @Override
     protected void onInited() {
         super.onInited();
         mStartController.init();
+    }
+
+    @Override
+    protected void populateUi(MainControllerUi ui) {
+        if (ui instanceof MainUi) {
+            populateUi((MainUi) ui);
+        }
+    }
+
+    private void populateUi(MainUi ui) {
+//        if (mState.getCurrentAccount() == null && !mPreferences.hasShownTraktLoginPrompt()) {
+//            ui.showLoginPrompt();
+//        }
     }
 
     @Override
@@ -126,10 +145,16 @@ public class MainController extends BaseUiController<MainController.MainControll
     public StartController getStartController() {
         return mStartController;
     }
-
     @Override
     protected void setDisplay(Display display) {
         super.setDisplay(display);
         mStartController.setDisplay(display);
+    }
+
+    @Override
+    protected void onSuspended() {
+        mStartController.suspend();
+
+        super.onSuspended();
     }
 }

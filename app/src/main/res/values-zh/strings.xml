@@ -19,4 +19,5 @@
     <string name="btn_previous">上一步</string>
     <string name="btn_save_and_login">保持并登录</string>
     <string name="hint_input_auth_code">输入验证码</string>
+    <string name="hint_password_confirm">再次输入密码</string>
 </resources>

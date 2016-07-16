@@ -58,6 +58,21 @@
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
+            <EditText
+                android:id="@+id/login_password_confirm_edt"
+                android:layout_below="@id/login_mobile_edt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/login_password_margin_top"
+                android:layout_width="@dimen/login_input_width"
+                android:layout_height="@dimen/login_input_height"
+                android:textSize="@dimen/login_input_hint_txt_size"
+                android:textColorHint="@color/login_hint_txt_color"
+                android:background="@drawable/login_input_bg"
+                android:hint="@string/hint_password_confirm"
+                android:inputType="textPassword"
+                android:visibility="gone"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" />
             <include layout="@layout/auth_code_layout"
                 android:layout_below="@id/login_mobile_edt"
                 android:layout_centerHorizontal="true"
