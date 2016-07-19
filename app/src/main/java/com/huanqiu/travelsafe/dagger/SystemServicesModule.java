@@ -8,10 +8,12 @@ import android.preference.PreferenceManager;
 
 import com.huanqiu.travelsafe.controllers.MainController;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.controllers.TranslationController;
 import com.huanqiu.travelsafe.event.RxBus;
 import com.huanqiu.travelsafe.utils.AppConfig;
 import com.huanqiu.travelsafe.utils.AppManager;
 import com.huanqiu.travelsafe.utils.BackgroundExecutor;
+import com.huanqiu.travelsafe.utils.SingleThreadBackExecutor;
 import com.huanqiu.travelsafe.utils.TravelSafeBackgroundExecutor;
 
 import java.util.concurrent.Executors;
@@ -98,6 +100,12 @@ public class SystemServicesModule {
         return new StartController();
     }
 
+    @Provides
+    @Singleton
+    public TranslationController providerTranslationController() {
+        return new TranslationController();
+    }
+
     @Provides @Singleton
     public BackgroundExecutor provideMultiThreadExecutor() {
         final int numberCores = Runtime.getRuntime().availableProcessors();
@@ -105,8 +113,8 @@ public class SystemServicesModule {
     }
 
     @Provides @Singleton
-    public BackgroundExecutor provideDatabaseThreadExecutor() {
-        return new TravelSafeBackgroundExecutor(Executors.newSingleThreadExecutor());
+    public SingleThreadBackExecutor provideDatabaseThreadExecutor() {
+        return new SingleThreadBackExecutor(Executors.newSingleThreadExecutor());
     }
 
 }

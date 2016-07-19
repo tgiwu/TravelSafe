@@ -4,12 +4,14 @@ import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.activities.LoginActivity;
 import com.huanqiu.travelsafe.controllers.MainController;
 import com.huanqiu.travelsafe.controllers.StartController;
+import com.huanqiu.travelsafe.controllers.TranslationController;
 import com.huanqiu.travelsafe.fragment.LoginPageFragment;
 import com.huanqiu.travelsafe.fragment.RegistryOneFragment;
 import com.huanqiu.travelsafe.fragment.RegistryTwoFragment;
 import com.huanqiu.travelsafe.fragment.RetrievePasswordStepOnePageFragment;
 import com.huanqiu.travelsafe.fragment.RetrievePasswordStepTwoPageFragment;
 import com.huanqiu.travelsafe.fragment.StartPageFragment;
+import com.huanqiu.travelsafe.fragment.TranslationFragment;
 import com.huanqiu.travelsafe.utils.TravelSafeBackgroundExecutor;
 
 import javax.inject.Singleton;
@@ -44,4 +46,8 @@ public interface DGraph {
     void inject(LoginPageFragment loginPageFragment);
 
     void inject(TravelSafeBackgroundExecutor travelSafeBackgroundExecutor);
+
+    void inject(TranslationController translationController);
+
+    void inject(TranslationFragment translationFragment);
 }
