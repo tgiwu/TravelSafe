@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpClientManager {
     public static String API_URL = "http://ngrok.zhangxd.cn";
     public static ServiceApi mApiService;
+    public static ThirdServiceApi mThirdServiceApi;
 
     public HttpClientManager() {
     }
@@ -21,5 +22,12 @@ public class HttpClientManager {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         mApiService = retrofit.create(ServiceApi.class);
+
+        Retrofit thirdRetrofit = new Retrofit.Builder()
+                .baseUrl("http://api.fanyi.baidu.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        mThirdServiceApi = thirdRetrofit.create(ThirdServiceApi.class);
     }
 }

@@ -57,28 +57,28 @@ public abstract class BaseActivity extends AppCompatActivity implements MainCont
     @Override
     protected void onStart() {
         super.onStart();
-        mMainController.attachDisplay(mDisplay);
-        mMainController.setHostCallbacks(this);
-        mMainController.init();
+
     }
 
     @Override
     protected void onResume() {
+        mMainController.attachDisplay(mDisplay);
+        mMainController.setHostCallbacks(this);
+        mMainController.init();
         super.onResume();
-
     }
 
     @Override
     protected void onPause() {
-
+        mMainController.suspend();
+        mMainController.setHostCallbacks(null);
+        mMainController.detachDisplay(mDisplay);
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        mMainController.suspend();
-        mMainController.setHostCallbacks(null);
-        mMainController.detachDisplay(mDisplay);
+
         super.onStop();
     }
 

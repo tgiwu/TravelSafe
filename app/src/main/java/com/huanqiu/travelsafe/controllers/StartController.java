@@ -54,6 +54,8 @@ public class StartController extends BaseUiController<StartController.StartUi, S
     @Inject
     BackgroundExecutor executor;
 
+    CompositeSubscription compositeSubscription;
+
     public StartController() {
         App.getInstance().getGraph().inject(this);
     }
@@ -61,9 +63,9 @@ public class StartController extends BaseUiController<StartController.StartUi, S
     @Override
     protected void onInited() {
         super.onInited();
-        setSubscriptions(new CompositeSubscription());
+        compositeSubscription = new CompositeSubscription();
         rxBus = Preconditions.checkNotNull(rxBus, "rxBus cannot be null");
-        getSubscriptions().add(rxBus.toObserverable()
+        compositeSubscription.add(rxBus.toObserverable()
                 .subscribe(this));
     }
 
@@ -215,6 +217,13 @@ public class StartController extends BaseUiController<StartController.StartUi, S
         } else {
             ui.showError(0x00000001);
         }
+    }
+
+    @Override
+    protected void onSuspended() {
+        super.onSuspended();
+        if (compositeSubscription.hasSubscriptions()) compositeSubscription.clear();
+        compositeSubscription = null;
     }
 
     public interface StartUi extends BaseUiController.Ui<StartUiCallback> {

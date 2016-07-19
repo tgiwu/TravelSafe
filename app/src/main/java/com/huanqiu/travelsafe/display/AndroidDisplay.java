@@ -1,5 +1,6 @@
 package com.huanqiu.travelsafe.display;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,12 +11,14 @@ import android.util.TypedValue;
 
 import com.google.common.base.Preconditions;
 import com.huanqiu.travelsafe.R;
+import com.huanqiu.travelsafe.activities.TranslationActivity;
 import com.huanqiu.travelsafe.fragment.LoginPageFragment;
 import com.huanqiu.travelsafe.fragment.RegistryOneFragment;
 import com.huanqiu.travelsafe.fragment.RegistryTwoFragment;
 import com.huanqiu.travelsafe.fragment.RetrievePasswordStepOnePageFragment;
 import com.huanqiu.travelsafe.fragment.RetrievePasswordStepTwoPageFragment;
 import com.huanqiu.travelsafe.fragment.StartPageFragment;
+import com.huanqiu.travelsafe.fragment.TranslationFragment;
 
 /**
  * Created by Administrator on 2016/7/6.
@@ -116,6 +119,11 @@ public class AndroidDisplay implements Display, FragmentManager.OnBackStackChang
         mActivity.onBackPressed();
     }
 
+    @Override
+    public void showTranslationActivity() {
+        mActivity.startActivity(new Intent(mActivity, TranslationActivity.class));
+    }
+
     private void showFragment(Fragment fragment) {
         mActivity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_main, fragment)
@@ -131,5 +139,10 @@ public class AndroidDisplay implements Display, FragmentManager.OnBackStackChang
         } else if (mActivity.getSupportFragmentManager().getBackStackEntryCount() == 1) {
 //            mHeaderBarFragment.setRegisterBtnVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void showTranslationFragment() {
+        showFragment(TranslationFragment.newInstance("translation"));
     }
 }

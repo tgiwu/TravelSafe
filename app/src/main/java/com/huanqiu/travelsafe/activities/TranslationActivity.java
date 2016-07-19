@@ -2,19 +2,17 @@ package com.huanqiu.travelsafe.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.MainController;
 import com.huanqiu.travelsafe.display.Display;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
+ * Created by Administrator on 2016/7/18.
  */
-public class MainActivity extends BaseActivity implements MainController.MainControllerUi {
-
+public class TranslationActivity extends BaseActivity implements MainController.MainControllerUi {
     private MainController.MainControllerUiCallback mUiCallbacks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +20,8 @@ public class MainActivity extends BaseActivity implements MainController.MainCon
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        getMainController().attachUi(this);
-    }
-
-    @Override
-    protected void onPause() {
-        getMainController().detachUi(this);
-        super.onPause();
-    }
-
-    @Override
     public int getLayout() {
-        return R.layout.activity_main;
+        return R.layout.translation_activity_layout;
     }
 
     @Override
@@ -43,10 +29,21 @@ public class MainActivity extends BaseActivity implements MainController.MainCon
         return false;
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        getMainController().attachUi(this);
+//    }
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        getMainController().detachUi(this);
+//    }
+
     @Override
     protected void handleIntent(Intent intent, Display display) {
-//        display.showStartPage();
-        display.showTranslationActivity();
+        display.showTranslationFragment();
     }
 
     @Override

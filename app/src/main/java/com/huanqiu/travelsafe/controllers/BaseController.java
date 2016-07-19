@@ -19,16 +19,6 @@ public abstract class BaseController {
     @Inject
     RxBus rxBus;
 
-    public CompositeSubscription getSubscriptions() {
-        return subscriptions;
-    }
-
-    public void setSubscriptions(CompositeSubscription subscriptions) {
-        this.subscriptions = subscriptions;
-    }
-
-    private CompositeSubscription subscriptions;
-
     public final void init() {
         Preconditions.checkState(mInited == false, "Already inited");
         mInited = true;

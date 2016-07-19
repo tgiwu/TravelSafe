@@ -22,5 +22,7 @@ public interface Display {
     void setSupportActionBar(Object toolbar, boolean handleBackground);
 
     void closeCurrentFragment();
+    void showTranslationActivity();
+    void showTranslationFragment();
 
 }

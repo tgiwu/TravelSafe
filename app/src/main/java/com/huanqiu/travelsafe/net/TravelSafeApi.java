@@ -5,10 +5,13 @@ import android.util.Log;
 import com.huanqiu.travelsafe.BuildConfig;
 import com.huanqiu.travelsafe.model.RequestVerificationCodeModel;
 import com.huanqiu.travelsafe.model.TokenModel;
+import com.huanqiu.travelsafe.model.TranslationModel;
+import com.huanqiu.travelsafe.utils.Constants;
 import com.huanqiu.travelsafe.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
@@ -65,6 +68,16 @@ public class TravelSafeApi {
         Observable<String> observable = HttpClientManager.mApiService.logout(auth);
         return observable.subscribeOn(Schedulers.newThread())
                 .throttleFirst(10 * 1000, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Observable<TranslationModel> requestTranslation(String q, String from, String to) {
+        Random random = new Random();
+        int randomInt = random.nextInt();
+        Observable<TranslationModel> observable = HttpClientManager.mThirdServiceApi.requestTransliton(q, from, to,
+                Constants.BAIDU_TRANSLATION_APP_ID, String.valueOf(randomInt), Utils.getBaiduTranslationSign(q, randomInt));
+        return observable.subscribeOn(Schedulers.newThread())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

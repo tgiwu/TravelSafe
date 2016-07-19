@@ -11,6 +11,10 @@ import android.view.View;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.BuildConfig;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
@@ -63,5 +67,24 @@ public class Utils {
 
     public static boolean checkNickname(String nickname) {
         return true;
+    }
+
+    public static String getBaiduTranslationSign(String q, int randomInt) {
+        String seed = Constants.BAIDU_TRANSLATION_APP_ID + q + randomInt + Constants.BAIDU_TRANSLATION_KEY;
+        byte[] hash = null;
+        try {
+            hash = MessageDigest.getInstance("MD5").digest(seed.getBytes("UTF-8"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        StringBuilder hex = new StringBuilder(hash.length * 2);
+        for (byte b : hash) {
+            if ((b & 0xFF) < 0x10) hex.append("0");
+            hex.append(Integer.toHexString(b & 0xFF));
+        }
+        return hex.toString();
+
     }
 }

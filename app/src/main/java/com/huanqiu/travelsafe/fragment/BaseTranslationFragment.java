@@ -13,21 +13,14 @@ import com.github.johnpersano.supertoasts.util.Style;
 import com.huanqiu.travelsafe.App;
 import com.huanqiu.travelsafe.R;
 import com.huanqiu.travelsafe.controllers.StartController;
-
-import java.util.Map;
+import com.huanqiu.travelsafe.controllers.TranslationController;
 
 /**
- * Created by Administrator on 2016/7/7.
+ * Created by Administrator on 2016/7/19.
  */
-public abstract class BaseStartPageFragment extends BaseTravelSafeFragment implements StartController.StartUi{
-
-    private StartController.StartUiCallback mCallBack;
+public abstract class BaseTranslationFragment extends BaseTravelSafeFragment implements TranslationController.TranslationUi{
+    private TranslationController.TranslationUiCallback mCallBack;
     private SuperCardToast mToast;
-
-    @Override
-    public void setCallbacks(StartController.StartUiCallback callbacks) {
-        this.mCallBack = callbacks;
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -36,6 +29,11 @@ public abstract class BaseStartPageFragment extends BaseTravelSafeFragment imple
     }
 
     protected abstract void initView();
+
+    @Override
+    public void setCallbacks(TranslationController.TranslationUiCallback callbacks) {
+        this.mCallBack = callbacks;
+    }
 
     @Override
     public boolean isModal() {
@@ -70,13 +68,13 @@ public abstract class BaseStartPageFragment extends BaseTravelSafeFragment imple
         mToast.show();
     }
 
-    protected final StartController.StartUiCallback getCallbacks() {
+    protected final TranslationController.TranslationUiCallback getCallbacks() {
         return mCallBack;
     }
 
 
-    private StartController getController() {
-        return App.from(getActivity()).getMainController().getStartController();
+    private TranslationController getController() {
+        return App.from(getActivity()).getMainController().getTranslationController();
     }
 
     @Override

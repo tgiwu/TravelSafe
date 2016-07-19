@@ -15,6 +15,8 @@ import com.huanqiu.travelsafe.controllers.StartController;
 import com.huanqiu.travelsafe.event.StartFragmentTransformEvent;
 import com.huanqiu.travelsafe.event.RxBus;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -116,7 +118,12 @@ public class StartPageFragment extends BaseStartPageFragment {
     }
 
     @Override
-    public void onFocusChange(View view, boolean b) {
+    public void doNext() {
 
+    }
+
+    @Override
+    public Map<String, String> getInputParam() {
+        return null;
     }
 }

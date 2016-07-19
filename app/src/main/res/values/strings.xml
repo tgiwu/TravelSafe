@@ -43,4 +43,31 @@
     <string name="toast_retrieve_password">This mobile is never registry, press Next to registry</string>
     <string name="hint_input_auth_code">iInput verification code</string>
     <string name="request_auth_code">Send auth code</string>
+
+    <!--asr start-->
+    <string name="reco_type_label">Recognition Type / Language Model</string>
+    <string name="dictation">Dictation</string>
+    <string name="search">Search</string>
+    <string name="tv">Television</string>
+
+    <string name="nlu_context_tag_label">NLU Context Tag</string>
+    <string name="detection_type_label">Detection Type</string>
+    <string name="long_endpointer">Long</string>
+    <string name="short_endpointer">Short</string>
+    <string name="none">None</string>
+
+    <string name="language_label">Language Code</string>
+    <string name="default_language">eng-USA</string>
+
+    <string name="logs_label">logs</string>
+    <string name="clear_logs_label">clear</string>
+
+    <string name="recognize">recognize()</string>
+    <string name="recognize_with_service">recognizeWithService()</string>
+    <string name="playing">Playing..</string>
+    <string name="listening">Listening..</string>
+    <string name="processing">Processing..</string>
+    <string name="app_version">SpeechKit SampleApp v2.1.3</string>
+    <!--asr end-->
+
 </resources>

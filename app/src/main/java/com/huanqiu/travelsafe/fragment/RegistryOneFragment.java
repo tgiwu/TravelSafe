@@ -17,6 +17,9 @@ import com.huanqiu.travelsafe.controllers.StartController;
 import com.huanqiu.travelsafe.event.CheckInputEvent;
 import com.huanqiu.travelsafe.event.StartFragmentTransformEvent;
 import com.huanqiu.travelsafe.event.RxBus;
+import com.nuance.speechkit.Audio;
+import com.nuance.speechkit.Session;
+import com.nuance.speechkit.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +34,9 @@ import butterknife.OnClick;
  * Created by Administrator on 2016/7/8.
  */
 public class RegistryOneFragment extends BaseStartPageFragment implements StartController.StartUi {
+
+
+
     @BindView(R.id.login_head_layout)
     RelativeLayout loginHeadLayout;
     @BindView(R.id.login_mobile_edt)
@@ -131,4 +137,6 @@ public class RegistryOneFragment extends BaseStartPageFragment implements StartC
         param.put("captcha", authCodeInput.getText().toString());
         return param;
     }
+
+
 }

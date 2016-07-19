@@ -23,6 +23,8 @@ public class MainController extends BaseUiController<MainController.MainControll
 
     @Inject
     StartController mStartController;
+    @Inject
+    TranslationController mTranslationController;
 
     @Inject
     RxBus rxBus;
@@ -99,13 +101,15 @@ public class MainController extends BaseUiController<MainController.MainControll
 
     @Override
     public boolean handleIntent(Intent intent) {
-        return mStartController.handleIntent(intent);
+        return mStartController.handleIntent(intent)
+                || mTranslationController.handleIntent(intent);
     }
 
     @Override
     protected void onInited() {
         super.onInited();
         mStartController.init();
+        mTranslationController.init();
     }
 
     @Override
@@ -145,16 +149,26 @@ public class MainController extends BaseUiController<MainController.MainControll
     public StartController getStartController() {
         return mStartController;
     }
+
+    public TranslationController getTranslationController() {
+        return mTranslationController;
+    }
     @Override
     protected void setDisplay(Display display) {
         super.setDisplay(display);
         mStartController.setDisplay(display);
+        mTranslationController.setDisplay(display);
     }
 
     @Override
     protected void onSuspended() {
         mStartController.suspend();
+        mTranslationController.suspend();
 
         super.onSuspended();
+    }
+
+    private void showTranslationActivity() {
+        getDisplay().showTranslationActivity();
     }
 }
